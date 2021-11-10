@@ -11,6 +11,7 @@
 	$: current_pressure = $weather.current?.pressure;
 	$: current_feels_like = Math.round($weather.current?.feels_like);
 	$: current_description = $weather.current?.weather[0]?.description;
+	$: iconUrl = $weather.iconUrl;
 
 	const onKeyDown = (event) => {
 		if (event.keyCode !== 13) return;
@@ -44,8 +45,7 @@
 		</div>
 	</div>
 	<div class="flex justify-center items-center">
-		<!-- Placeholder for weather icon -->
-		<span class="w-40 h-40 bg-blue-100 rounded-full" />
+		<img src={iconUrl} alt="weather icon" class="w-52 h-52" />
 	</div>
 	<div class="flex-1 min-w-full my-12 border-l-2 border-blue-600">
 		<h2 class="text-center text-2xl mb-4">Weather forecast for 7 days</h2>

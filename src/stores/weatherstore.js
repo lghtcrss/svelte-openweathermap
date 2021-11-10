@@ -29,7 +29,11 @@ const fetchWeather = async (geocode) => {
 	const res = await fetch(url);
 	const data = await res.json();
 	if (res.ok) {
-		const interimObject = { name: geocode.name, country: geocode.country };
+		const interimObject = {
+			name: geocode.name,
+			country: geocode.country,
+			iconUrl: `https://openweathermap.org/img/wn/${data.current?.weather[0]?.icon}@4x.png`
+		};
 		const loadedWeather = { ...data, ...interimObject };
 		weather.set(loadedWeather);
 	}
