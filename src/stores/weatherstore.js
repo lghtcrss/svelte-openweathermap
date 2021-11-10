@@ -1,6 +1,26 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
 
+export const chartData = writable({});
+const getChartData = async (newWeather) => {
+	if (Object.keys(newWeather).length === 0) return;
+	const newChartData = {
+		temperatures: newWeather.daily.map((data) => {
+			return data?.temp?.day;
+		}),
+		labels: newWeather.daily.map((data) => {
+			return new Date(data?.dt * 1000).toLocaleDateString();
+		}),
+		humidities: newWeather.daily.map((data) => {
+			return data?.humidity;
+		}),
+		pressures: newWeather.daily.map((data) => {
+			return data?.pressure;
+		})
+	};
+	chartData.set(newChartData);
+};
+
 export const weather = writable({});
 const fetchWeather = async (geocode) => {
 	if (Object.keys(geocode).length === 0) return;
@@ -8,10 +28,16 @@ const fetchWeather = async (geocode) => {
 	const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${geocode.lat}&lon=${geocode.lon}&units=metric&exclude=hourly,minutely,alerts&appid=${apiKey}`;
 	const res = await fetch(url);
 	const data = await res.json();
-	const interimObject = { name: geocode.name, country: geocode.country };
-	const loadedWeather = { ...data, ...interimObject };
-	weather.set(loadedWeather);
+	if (res.ok) {
+		const interimObject = { name: geocode.name, country: geocode.country };
+		const loadedWeather = { ...data, ...interimObject };
+		weather.set(loadedWeather);
+	}
 };
+weather.subscribe((val) => {
+	if (!val) return;
+	getChartData(val);
+});
 
 export const geocode = writable({});
 const fetchGeocode = async (cityName) => {
@@ -20,22 +46,24 @@ const fetchGeocode = async (cityName) => {
 	const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
 	const res = await fetch(url);
 	const data = await res.json();
-	const loadedGeocode = data.map((data) => {
-		return {
-			name: data.name,
-			country: data.country,
-			lat: data.lat,
-			lon: data.lon
-		};
-	});
-	geocode.set(loadedGeocode[0]);
+	if (res.ok) {
+		const loadedGeocode = data.map((data) => {
+			return {
+				name: data.name,
+				country: data.country,
+				lat: data.lat,
+				lon: data.lon
+			};
+		});
+		geocode.set(loadedGeocode[0]);
+	}
 };
 geocode.subscribe((val) => {
-	if (Object.keys(val).length === 0) return;
+	if (!val || Object.keys(val).length === 0) return;
 	fetchWeather(val);
 });
 
-export const city = writable(browser && (sessionStorage.getItem('city') || 'Paderborn'));
+export const city = writable(browser && (sessionStorage.getItem('city') || 'Berlin'));
 city.subscribe((val) => {
 	browser && sessionStorage.setItem('city', val);
 	fetchGeocode(val);
