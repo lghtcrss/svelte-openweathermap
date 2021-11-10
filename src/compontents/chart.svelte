@@ -58,13 +58,23 @@
 				scales: {
 					y: {
 						beginAtZero: true,
-						position: 'left'
+						position: 'left',
+						ticks: {
+							callback: function (value, index, values) {
+								return `${value}°C`;
+							}
+						}
 					},
 					y1: {
 						position: 'right',
 						// grid line settings
 						grid: {
 							drawOnChartArea: false // only want the grid lines for one axis to show up
+						},
+						ticks: {
+							callback: function (value, index, values) {
+								return `${value}%`;
+							}
 						}
 					},
 					y2: {
@@ -72,6 +82,11 @@
 						// grid line settings
 						grid: {
 							drawOnChartArea: false // only want the grid lines for one axis to show up
+						},
+						ticks: {
+							callback: function (value, index, values) {
+								return `${value}hPa`;
+							}
 						}
 					}
 				}
