@@ -47,7 +47,7 @@ export const geocode = writable({});
 const fetchGeocode = async (cityName) => {
 	if (!cityName) return;
 	const apiKey = `420cf3bc48a83bc3beed2e87e4735ec6`;
-	const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
+	const url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
 	const res = await fetch(url);
 	const data = await res.json();
 	if (res.ok) {
