@@ -4,7 +4,7 @@ This is a basic example project with [SvelteKit](https://kit.svelte.dev/), svelt
 
 ## Demo
 
-TODO: Link to GitHub Pages
+A demo can be seen on [my test page](https://owm.eppinger.media).
 
 ## Developing
 
