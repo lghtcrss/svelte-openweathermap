@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Start - Open Weather Map with Svelte</title>
+
+		
+
+		<link rel="modulepreload" href="/_app/start-8c4acd2c.js">
+		<link rel="modulepreload" href="/_app/chunks/vendor-76ca8483.js">
+		<link rel="modulepreload" href="/_app/pages/__layout.svelte-673e6f69.js">
+		<link rel="modulepreload" href="/_app/pages/index.svelte-6989454d.js">
+		<link rel="stylesheet" href="/_app/assets/start-464e9d0a.css">
+		<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-de79c61c.css">
+
+		<script type="module">
+			import { start } from "/_app/start-8c4acd2c.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"","assets":""},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/_app/pages/__layout.svelte-673e6f69.js"),
+						import("/_app/pages/index.svelte-6989454d.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "\u002F",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<header class="min-w-full h-12 bg-blue-500 fixed top-0 flex justify-center items-center shadow-md"><h1 class="text-white font-bold tracking-wide text-2xl">Open Weather Map with Svelte</h1></header>
+<main class="mt-16 text-gray-800">
+
+<section class="mx-auto max-w-xl px-8"><label class="block mb-2" for="targetNumber">Location</label>
+	<input class="rounded w-full" type="text" value="false"></section>
+<hr class="mt-6 mb-3 border-gray-300">
+
+<div class="flex flex-wrap justify-between mx-auto max-w-xl px-8"><div class="min-w-60"><p class="text-sm text-blue-600">11/10/2021, 8:48:07 PM</p>
+		<p class="text-2xl text-gray-700 font-semibold tracking-wider">undefined, undefined</p>
+		<p class="text-2xl">NaN°C</p>
+		<div class="mt-2 pl-4 border-l-2 border-blue-600"><p>Feels like NaN°C. <span class="capitalize">undefined.</span></p>
+			<p>Humidity: undefined%</p>
+			<p>Pressure: undefinedhPa</p></div></div>
+	<div class="flex justify-center items-center"><img alt="weather icon" class="w-52 h-52"></div>
+	<div class="flex-1 min-w-full my-12 border-l-2 border-blue-600"><h2 class="text-center text-2xl mb-4">Weather forecast for 7 days</h2>
+		<canvas id="weatherChart" width="2" height="1"></canvas></div></div></main>
+<hr class="mt-10 mb-3 border-blue-300">
+<footer class="mx-auto max-w-xl text-sm relative text-gray-800 mb-7"><p class="absolute right-0 float-right pr-8">v1.0.0</p>
+	<p class="italic pl-8">Konstantin Eppinger</p></footer>
+
+
+
+			
+		</div>
+	</body>
+</html>
