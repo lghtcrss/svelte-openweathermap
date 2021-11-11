@@ -95,4 +95,4 @@
 	};
 </script>
 
-<canvas id="weatherChart" width="2" height="1" />
+<canvas id="weatherChart" width="4" height="3" />
